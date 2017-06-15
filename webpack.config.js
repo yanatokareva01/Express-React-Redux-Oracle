@@ -1,8 +1,10 @@
 module.exports = {
-	entry: './src/client.js',
+	entry: {
+		index: './src/index.js'
+	},
 	output: {
 		path: __dirname + '/build',
-		filename: 'bundle.js'
+		filename: '[name].js'
 	},
 	module: {
 		loaders: [
@@ -12,7 +14,7 @@ module.exports = {
 				use: [{
 					loader: 'babel-loader',
 					options: {
-						presets: ['es2015']
+						presets: ['es2015', 'react']
 					}
 				}]
 			}
