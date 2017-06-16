@@ -1,0 +1,10 @@
+{
+	"development": {
+		"VK_APP_ID": "",
+		"VK_APP_SECRET": "",
+		"database": "xe",
+		"username": "yana",
+		"password": "password",
+		"dialect": "oracle"
+	}
+}

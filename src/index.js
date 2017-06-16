@@ -1,7 +1,10 @@
-let React = require('react');
-let ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import SignUpButton from './SignUpButton';
 
 ReactDOM.render(
-	<div>Hello, world!</div>,
+	<div>
+		<SignUpButton/>
+	</div>,
 	document.getElementById("root")
 );
