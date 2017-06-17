@@ -15,7 +15,7 @@ router.get('/sign_in',
 		failureRedirect: '/'
 	}),
 	function (req, res) {
-		res.redirect('/');
+		res.redirect('/account');
 	});
 
 router.get("/:username", function(req, res) {
@@ -39,7 +39,5 @@ router.post("/sign_up", passport.authenticate('sign_up', function (req, res) {
 	// for authentication, so
 	// this function will not be called.
 }));
-
-
 
 module.exports = router;

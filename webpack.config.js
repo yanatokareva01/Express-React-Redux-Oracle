@@ -1,6 +1,7 @@
 module.exports = {
 	entry: {
-		index: './src/index.js'
+		index: './src/index.js',
+		account: './src/account.js'
 	},
 	output: {
 		path: __dirname + '/build',
