@@ -29,7 +29,7 @@ export default class Form extends React.Component {
 					<button type="submit" style={{width: "100%"}} className="btn btn-default">Submit</button>
 				</form>
 				<br/>
-				<form action="#" method="post">
+				<form action="/users/sign_up" method="post">
 					<button style={{width: "100%"}} className="btn btn-primary" type="submit">Sign up with VK</button>
 				</form>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class SignInComponent {
+export default class SignInForm extends React.Component {
 	render () {
 		return (
 			<div>
@@ -16,10 +16,10 @@ export default class SignInComponent {
 						<input type="password" className="form-control" id="password" placeholder="password"/>
 					</div>
 
-					<button type="submit" style={{width: "100%"}} className="btn btn-default">Submit</button>
+					<button type="submit" style={{width: "100%"}} className="btn btn-success">Submit</button>
 				</form>
 				<br/>
-				<form action="#" method="post">
+				<form action="/users/sign_in" method="post">
 					<button style={{width: "100%"}} className="btn btn-primary" type="submit">Sign in with VK</button>
 				</form>
 
