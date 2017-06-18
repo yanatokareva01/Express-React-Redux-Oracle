@@ -15,7 +15,11 @@ configurePassport(app);
 app.use('/users', users);
 
 app.get('/', function (req, res) {
-	res.sendfile('public/index.html');
+	if (req.isAuthenticated()) {
+		res.redirect('/account');
+	}
+
+	res.sendfile('public/main.html');
 });
 
 app.get('/account', ensureAuthenticated, function (req, res) {
@@ -23,7 +27,11 @@ app.get('/account', ensureAuthenticated, function (req, res) {
 });
 
 app.get('*', function (req, res) {
-	res.sendfile('public/index.html');
+	if (req.isAuthenticated()) {
+		res.redirect('/account');
+	}
+
+	res.sendfile('public/main.html');
 });
 
 app.listen(process.env.PORT || 3000);
