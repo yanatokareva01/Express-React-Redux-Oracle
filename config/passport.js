@@ -50,6 +50,7 @@ module.exports = function (app) {
 			clientID: process.env.VK_APP_ID,
 			clientSecret: process.env.VK_APP_SECRET,
 			callbackURL: "http://localhost:3000/users/sign_up",
+			profileFields: ['photo_200', 'bdate', 'about', 'activities']
 		},
 		function verify(accessToken, refreshToken, params, profile, done) {
 			models.User.findOne({
@@ -58,12 +59,14 @@ module.exports = function (app) {
 				}
 			}).then(function (user) {
 				if (user) {
-					console.log('User already exists');
 					return done(null, false, {message: "User already exists"});
 				} else {
 					models.User.create({
 						username: profile.username,
-						name: profile.name.givenName + ' ' + profile.name.familyName
+						name: profile.displayName,
+						photo: profile._json.photo_200,
+						about: profile._json.about,
+						activities: profile._json.activities
 					}).then(user => {
 						if (user) {
 							done(null, user);

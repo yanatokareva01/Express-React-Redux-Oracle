@@ -4,6 +4,7 @@ import User from '../components/User';
 import Page from '../components/Page';
 import { connect } from 'react-redux';
 import * as pageActions from '../actions/PageActions';
+import * as userActions from '../actions/UserActions';
 import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
@@ -12,7 +13,7 @@ class App extends React.Component {
 			<div>
 				<Navbar/>
 				<div className="container starter-template">
-					<User username={this.props.user.username}/>
+					<User user={this.props.user} loadCurrentUser={this.props.userActions.loadCurrentUser} />
 					<Page points={this.props.page.points} setPoints={this.props.pageActions.setPoints}/>
 				</div>
 			</div>
@@ -29,7 +30,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
 	return {
-		pageActions: bindActionCreators(pageActions, dispatch)
+		pageActions: bindActionCreators(pageActions, dispatch),
+		userActions: bindActionCreators(userActions, dispatch)
 	}
 }
 

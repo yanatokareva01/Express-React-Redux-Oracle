@@ -8,6 +8,15 @@ module.exports = function(sequelize, DataTypes) {
 		name: {
 			type: DataTypes.STRING,
 			notNull: true
+		},
+		photo: {
+			type: DataTypes.STRING,
+		},
+		about: {
+			type: DataTypes.STRING,
+		},
+		activities: {
+			type: DataTypes.STRING
 		}
 	});
 };

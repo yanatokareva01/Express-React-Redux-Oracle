@@ -9,8 +9,7 @@ export default class Page extends React.Component {
 		const { points } = this.props;
 		return (
 			<div>
-				<button onClick={this.onClick.bind(this)}>2014</button>
-				<p>У тебя { points.length} точек! </p>
+				<p>У тебя { points.length } точек! </p>
 			</div>
 		)
 	}

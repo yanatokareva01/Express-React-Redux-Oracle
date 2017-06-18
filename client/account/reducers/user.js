@@ -1,8 +1,18 @@
+import { LOAD_CURRENT_USER } from '../constants/User';
+
 const initialState = {
 	username: '',
-	name: ''
+	name: '',
+	photo: '',
+	about: '',
+	activities: '',
 };
 
-export default function user(state = initialState) {
-	return state
+export default function user(state = initialState, action) {
+	switch (action.type) {
+		case LOAD_CURRENT_USER:
+			return {...state, ...action.payload };
+		default:
+			return state;
+	}
 }
