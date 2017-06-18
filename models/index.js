@@ -2,7 +2,7 @@ let Sequelize = require('sequelize-oracle');
 let path = require('path');
 let env = process.env.NODE_ENV || "development";
 let fs = require('fs');
-let config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
+let config = require(path.join(__dirname, '../config/sequelize.json'))[env];
 let sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 let db = {};
