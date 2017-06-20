@@ -26,4 +26,19 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+let bcrypt = require('bcrypt-nodejs');
+db.User.hasMany( db.Point, { as: 'points' } );
+
+db.User.generateHash = function (password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+db.User.isPasswordValid = function (password, hash) {
+	return bcrypt.compareSync(password, hash);
+};
+
+//sequelize.sync({ force: true }).then(function () {
+//	console.log("ok");
+//});
+
 module.exports = db;

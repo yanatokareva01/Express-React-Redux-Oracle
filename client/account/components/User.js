@@ -1,4 +1,6 @@
 import React from 'react';
+import PointsForm from '../components/PointsForm';
+import { Card } from 'belle';
 
 export default class User extends React.Component {
 	componentDidMount () {
@@ -19,14 +21,34 @@ export default class User extends React.Component {
 		const user = this.props.user;
 		return (
 			<div className="row">
-				<div className="col-lg-4 col-md-4 col-xs-12">
-					<img width="100%" height="100%" src={user.photo} />
-				</div>
-				<div className="col-lg-8 col-md-8 col-xs-12" style={{ textAlign: "left"}}>
-					<h1>{ user.username }</h1>
-					<h2>Name: { user.name }</h2>
-					<h2>About: { user.about }</h2>
-					<h2>Activities: { user.activities }</h2>
+				<div className="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-xs-12">
+					<Card>
+						<div className="row">
+							<div className="col-lg-4 col-md-4 col-xs-12">
+								<img width="95%" height="95%" src={user.photo} />
+							</div>
+							<div className="col-lg-8 col-md-8 col-xs-12" style={{ textAlign: "left"}}>
+								<p className="lead">{ user.username }</p>
+								<table className="table table-striped">
+									<tbody>
+									<tr>
+										<td>Name</td>
+										<td>{ user.name }</td>
+									</tr>
+									<tr>
+										<td>About</td>
+										<td>{ user.about }</td>
+									</tr>
+									<tr>
+										<td>Activities</td>
+										<td>{ user.activities }</td>
+									</tr>
+									</tbody>
+								</table>
+								<PointsForm user={user} setPoints={this.props.setPoints} action={"/users/" + user.username + "/points"}/>
+							</div>
+						</div>
+					</Card>
 				</div>
 			</div>
 		)

@@ -4,16 +4,16 @@ export default class SignInForm extends React.Component {
 	render () {
 		return (
 			<div>
-				<form method="post" action="#">
+				<form method="post" action="/users/sign_in_local">
 					<div className="form-group">
 						<label htmlFor="username">Username</label>
-						<input type="text" className="form-control" id="username" placeholder="username"/>
+						<input name="username" type="text" className="form-control" id="username" placeholder="username"/>
 					</div>
 
 
 					<div className="form-group">
 						<label htmlFor="password">Password</label>
-						<input type="password" className="form-control" id="password" placeholder="password"/>
+						<input name="password" type="password" className="form-control" id="password" placeholder="password"/>
 					</div>
 
 					<button type="submit" style={{width: "100%"}} className="btn btn-success">Submit</button>

@@ -1,14 +1,20 @@
 let express = require('express');
 let configurePassport = require('./config/passport');
 let users = require('./routes/users');
+let bodyParser = require('body-parser');
 
 const app = express();
+
 app.use(express.static('public'));
 app.use(express.static('build'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(require('express-session')({ secret: 'keyboard cat' }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
 
 configurePassport(app);
 

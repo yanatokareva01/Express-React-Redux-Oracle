@@ -1,22 +1,34 @@
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('User', {
+	const User = sequelize.define('User', {
 		username: {
 			type: DataTypes.STRING,
-			notNull: true,
-			unique: true
+			notNull: true
+		},
+		password: {
+			type: DataTypes.STRING,
 		},
 		name: {
 			type: DataTypes.STRING,
 			notNull: true
 		},
 		photo: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING
 		},
 		about: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING
 		},
 		activities: {
 			type: DataTypes.STRING
 		}
+	}, {
+		classMethods: {
+			associate: (models) => {
+				User.hasMany(models.Point, {
+					as: 'points',
+				});
+			},
+		},
 	});
+
+	return User;
 };

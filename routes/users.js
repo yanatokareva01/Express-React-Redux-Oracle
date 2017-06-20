@@ -30,6 +30,18 @@ router.post("/sign_up", passport.authenticate('sign_up', function (req, res) {
 	// this function will not be called.
 }));
 
+router.post('/sign_up_local', passport.authenticate('sign_up_local', {
+		failureRedirect: '/',
+		successRedirect: '/account',
+	}
+));
+
+router.post('/sign_in_local', passport.authenticate('sign_in_local', {
+		failureRedirect: '/',
+		successRedirect: '/account',
+	}
+));
+
 router.get("/current", function (req, res) {
 	if (req.isAuthenticated()) {
 		res.send(req.user);
@@ -48,4 +60,28 @@ router.get("/:username", function(req, res) {
 	})
 });
 
+router.get("/:username/points", ensureAuthenticated, function(req, res) {
+	models.User.findOne({
+		where: {
+			username: req.params.username
+		}
+	}).then(function (user) {
+		user.getPoints().then(function (points) {
+			res.send(points);
+		})
+	})
+});
+
+router.post("/:username/points", ensureAuthenticated, function(req, res) {
+	let point = models.Point.create({x: req.body.x, y: req.body.y, result: true, UserId: req.user.id });
+	res.sendStatus(200)
+});
+
 module.exports = router;
+
+function ensureAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/')
+}
