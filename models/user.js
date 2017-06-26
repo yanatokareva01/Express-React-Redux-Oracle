@@ -19,7 +19,11 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		activities: {
 			type: DataTypes.STRING
-		}
+		},
+		radius: {
+			type: DataTypes.DOUBLE,
+			notNull: true
+		},
 	}, {
 		classMethods: {
 			associate: (models) => {

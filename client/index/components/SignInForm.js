@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class SignInForm extends React.Component {
 	render () {
@@ -7,13 +7,13 @@ export default class SignInForm extends React.Component {
 				<form method="post" action="/users/sign_in_local">
 					<div className="form-group">
 						<label htmlFor="username">Username</label>
-						<input name="username" type="text" className="form-control" id="username" placeholder="username"/>
+						<input required={true} name="username" type="text" className="form-control" id="username" placeholder="username"/>
 					</div>
 
 
 					<div className="form-group">
 						<label htmlFor="password">Password</label>
-						<input name="password" type="password" className="form-control" id="password" placeholder="password"/>
+						<input required={true} name="password" type="password" className="form-control" id="password" placeholder="password"/>
 					</div>
 
 					<button type="submit" style={{width: "100%"}} className="btn btn-success">Submit</button>

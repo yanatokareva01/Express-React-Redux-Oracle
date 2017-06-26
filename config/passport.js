@@ -1,8 +1,8 @@
 module.exports = function (app) {
-	let models = require('../models');
-	let passport = require('passport');
-	let VkStrategy  = require('passport-vkontakte').Strategy;
-	let LocalStrategy = require('passport-local').Strategy;
+	let models = require("../models");
+	let passport = require("passport");
+	let VkStrategy  = require("passport-vkontakte").Strategy;
+	let LocalStrategy = require("passport-local").Strategy;
 
 	app.use(passport.initialize());
 	app.use(passport.session());
@@ -25,7 +25,7 @@ module.exports = function (app) {
 		})
 	});
 
-	passport.use('sign_in', new VkStrategy(
+	passport.use("sign_in", new VkStrategy(
 		{
 			clientID: process.env.VK_APP_ID,
 			clientSecret: process.env.VK_APP_SECRET,
@@ -40,18 +40,18 @@ module.exports = function (app) {
 				if (user) {
 					done(null, user);
 				} else {
-					return done(null, false, { message: 'No such user' });
+					return done(null, false, { message: "No such user" });
 				}
 			});
 		}
 	));
 
-	passport.use('sign_up', new VkStrategy(
+	passport.use("sign_up", new VkStrategy(
 		{
 			clientID: process.env.VK_APP_ID,
 			clientSecret: process.env.VK_APP_SECRET,
 			callbackURL: "http://localhost:3000/users/sign_up",
-			profileFields: ['photo_100', 'bdate', 'about', 'activities']
+			profileFields: ["photo_100", "bdate", "about", "activities"]
 		},
 		function verify(accessToken, refreshToken, params, profile, done) {
 			models.User.findOne({
@@ -67,12 +67,13 @@ module.exports = function (app) {
 						name: profile.displayName,
 						photo: profile._json.photo_100,
 						about: profile._json.about,
-						activities: profile._json.activities
+						activities: profile._json.activities,
+						radius: 1
 					}).then(user => {
 						if (user) {
 							done(null, user);
 						} else {
-							return done(null, false, { message: 'Can\'t create user' });
+							return done(null, false, { message: "Can\"t create user" });
 						}
 					});
 				}
@@ -80,7 +81,7 @@ module.exports = function (app) {
 		}
 	));
 
-	passport.use('sign_up_local', new LocalStrategy(
+	passport.use("sign_up_local", new LocalStrategy(
 		{
 			passReqToCallback: true
 		},
@@ -99,12 +100,13 @@ module.exports = function (app) {
 						name: req.body.name,
 						about: req.body.about,
 						activities: req.body.activities,
-						photo: "https://vk.com/images/camera_100.png"
+						photo: "https://vk.com/images/camera_100.png",
+						radius: 1
 					}).then(user => {
 						if (user) {
 							done(null, user);
 						} else {
-							return done(null, false, { message: 'Can\'t create user' });
+							return done(null, false, { message: "Can\"t create user" });
 						}
 					});
 				}
@@ -112,7 +114,7 @@ module.exports = function (app) {
 		}
 	));
 
-	passport.use('sign_in_local', new LocalStrategy(
+	passport.use("sign_in_local", new LocalStrategy(
 		{
 			passReqToCallback: true
 		},
@@ -125,7 +127,7 @@ module.exports = function (app) {
 				if (user && models.User.isPasswordValid(password, user.password)) {
 					done(null, user);
 				} else {
-					return done(null, false, { message: 'Invalid username or password' });
+					return done(null, false, { message: "Invalid username or password" });
 				}
 			})
 		}

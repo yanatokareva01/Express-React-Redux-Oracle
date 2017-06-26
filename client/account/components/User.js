@@ -3,20 +3,6 @@ import PointsForm from '../components/PointsForm';
 import { Card } from 'belle';
 
 export default class User extends React.Component {
-	componentDidMount () {
-		let xhr = new XMLHttpRequest();
-		xhr.open("get", "/users/current");
-		xhr.send();
-
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState != 4) return;
-
-			if (xhr.status == 200) {
-				this.props.loadCurrentUser(JSON.parse(xhr.responseText));
-			}
-		}.bind(this);
-	}
-
 	render() {
 		const user = this.props.user;
 		return (
@@ -25,10 +11,10 @@ export default class User extends React.Component {
 					<Card>
 						<div className="row">
 							<div className="col-lg-4 col-md-4 col-xs-12">
-								<img width="95%" height="95%" src={user.photo} />
+								<img style={{marginTop: "10px"}} width="95%" height="95%" src={user.photo} />
 							</div>
 							<div className="col-lg-8 col-md-8 col-xs-12" style={{ textAlign: "left"}}>
-								<p className="lead">{ user.username }</p>
+								<h5 >{ user.username }</h5>
 								<table className="table table-striped">
 									<tbody>
 									<tr>
@@ -45,9 +31,17 @@ export default class User extends React.Component {
 									</tr>
 									</tbody>
 								</table>
-								<PointsForm user={user} setPoints={this.props.setPoints} action={"/users/" + user.username + "/points"}/>
+								<PointsForm sendRadius={this.props.sendRadius} sendPoint={this.props.sendPoint} user={user}/>
 							</div>
 						</div>
+					</Card>
+				</div>
+				<div className="col-md-2">
+					<Card>
+						<form method="get" action="/users/sign_out">
+							<button className="btn btn-primary">Sign out</button>
+						</form>
+						<br/>
 					</Card>
 				</div>
 			</div>

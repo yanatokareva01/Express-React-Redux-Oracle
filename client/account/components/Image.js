@@ -1,14 +1,8 @@
 import React from 'react';
 
 export default class Image extends React.Component {
-	getRadius () {
-		for (let input of document.getElementById("r").children)
-			if (input.children[0].checked)
-				return input.children[0].value;
-	}
-
 	onImageClick (event) {
-		const r = this.getRadius();
+		const r = this.props.radius;
 
 		let offsetX = event.nativeEvent.offsetX;
 		let offsetY = event.nativeEvent.offsetY;
@@ -18,40 +12,14 @@ export default class Image extends React.Component {
 		const x = r*(offsetX - parent.clientWidth / 2 ) / parent.clientWidth * 2;
 		const y = r*(parent.clientHeight / 2 - offsetY) / parent.clientHeight * 2;
 
-		const xhr = new XMLHttpRequest();
-
-		xhr.open("post", this.props.action);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-
-		xhr.onload = function () {
-			this.loadPoints();
-			//this.drawPoints();
-		}.bind(this);
-
-		xhr.send(JSON.stringify({ x: x, y: y }));
-	}
-
-	loadPoints (e) {
-		var xhr = new XMLHttpRequest();
-		let url = this.props.action;
-		xhr.open("get", url);
-
-		xhr.send();
-
-		xhr.onreadystatechange = function () {
-			if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-				this.props.setPoints(JSON.parse(xhr.responseText).map(function (point) {
-					return { x: point.x, y: point.y, result: point.result == 1 ? true : false };
-				}))
-			}
-		}.bind(this);
+		this.props.sendPoint(x, y);
 	}
 
 	render () {
 		let pointDivs;
 		if (document.getElementById("image")) {
 			let parent = document.getElementById("image");
-			var r = this.getRadius();
+			var r = this.props.radius;
 
 			pointDivs = this.props.points.map(function (point, i) {
 				const offsetX = point.x / r * parent.clientWidth / 2 + parent.clientWidth / 2;

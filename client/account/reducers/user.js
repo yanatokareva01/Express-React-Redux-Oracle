@@ -6,6 +6,7 @@ const initialState = {
 	photo: '',
 	about: '',
 	activities: '',
+	radius: ''
 };
 
 export default function user(state = initialState, action) {

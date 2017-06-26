@@ -1,5 +1,4 @@
-import React from 'react';
-import belle from 'belle';
+import React from "react";
 
 export default class Form extends React.Component {
 	render () {
@@ -8,12 +7,12 @@ export default class Form extends React.Component {
 				<form method="post" action="/users/sign_up_local">
 					<div className="form-group">
 						<label htmlFor="username">Username</label>
-						<input type="text" name="username" className="form-control" id="username" placeholder="username"/>
+						<input required={true} type="text" name="username" className="form-control" id="username" placeholder="username"/>
 					</div>
 
 					<div className="form-group">
 						<label htmlFor="name">Name</label>
-						<input type="text" name="name" className="form-control" id="name" placeholder="name"/>
+						<input required={true} type="text" name="name" className="form-control" id="name" placeholder="name"/>
 					</div>
 
 					<div className="form-group">
@@ -28,7 +27,7 @@ export default class Form extends React.Component {
 
 					<div className="form-group">
 						<label htmlFor="password">Password</label>
-						<input name="password" type="password" className="form-control" id="password" placeholder="password"/>
+						<input required={true} name="password" type="password" className="form-control" id="password" placeholder="password"/>
 					</div>
 
 					<button type="submit" style={{width: "100%"}} className="btn btn-default">Submit</button>
@@ -37,7 +36,6 @@ export default class Form extends React.Component {
 				<form action="/users/sign_up" method="post">
 					<button style={{width: "100%"}} className="btn btn-primary" type="submit">Sign up with VK</button>
 				</form>
-
 			</div>
 		)
 	}

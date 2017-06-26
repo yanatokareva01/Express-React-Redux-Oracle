@@ -16,9 +16,9 @@ export default class Table extends React.Component {
 					this.props.points.map(function (point, i) {
 						return (
 							<tr key={i} className={point.result ? "success" : "danger"}>
-								<td>{point.x}</td>
-								<td>{point.y}</td>
-								<td>{String(point.result)}</td>
+								<td>{Math.round(point.x*100)/100}</td>
+								<td>{Math.round(point.y*100)/100}</td>
+								<td>{point.result == true ? "True" : "False"}</td>
 							</tr>
 						)
 					})

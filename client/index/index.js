@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Button from '../shared/Button';
-import Navbar from '../shared/Navbar';
-import SignUpForm from './components/SignUpForm';
-import SignInForm from './components/SignInForm';
+import React from "react";
+import ReactDOM from "react-dom";
+import Navbar from "../shared/Navbar";
+import SignUpForm from "./components/SignUpForm";
+import SignInForm from "./components/SignInForm";
 
 ReactDOM.render(
 	<div>

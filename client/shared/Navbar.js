@@ -1,4 +1,4 @@
-let React = require('react');
+let React = require("react");
 
 export default class Navbar extends React.Component {
 	render () {
